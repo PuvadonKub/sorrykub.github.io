@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เค้าขอโทษนะ... 🥺</title>
+    <style>
+        /* ตั้งค่าพื้นฐาน */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background-color: #fff0f3;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* กันสกอร์บาร์โผล่ตอนหัวใจลอย */
+        }
+
+        /* กล่องข้อความ Responsive */
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 { color: #ff4d6d; font-size: 1.8rem; margin-bottom: 15px; }
+        p { color: #555; font-size: 1.1rem; line-height: 1.5; margin-bottom: 30px; }
+
+        /* ส่วนของปุ่ม */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+            touch-action: manipulation;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #yesBtn:active { transform: scale(0.9); }
+
+        #noBtn {
+            background-color: #eeeeee;
+            color: #888;
+            position: relative; 
+            z-index: 999;
+        }
+
+        /* หัวใจลอย */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* ปรับแต่งสำหรับหน้าจอเล็กมาก */
+        @media (max-width: 320px) {
+            h1 { font-size: 1.5rem; }
+            p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div id="content">
+            <h1 id="title">ดีกันนะ... 🥺</h1>
+            <p id="desc">เค้าสำนึกผิดไปแล้ววว<br>หายโกรธเค้านะครับหมูน้อย 🐷</p>
+            <div class="btn-group">
+                <button id="yesBtn" onclick="accept()">หายงอนแล้ว</button>
+                <button id="noBtn" onmouseover="moveBtn()" onclick="moveBtn()">ไม่หาย!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function moveBtn() {
+            const btn = document.getElementById('noBtn');
+
+            btn.style.position = 'fixed';
+
+            const padding = 20;
+            const maxX = window.innerWidth - btn.offsetWidth - padding;
+            const maxY = window.innerHeight - btn.offsetHeight - padding;
+            
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        function accept() {
+            const content = document.getElementById('content');
+            const noBtn = document.getElementById('noBtn');
+            if(noBtn) noBtn.remove(); 
+
+            // เพิ่ม Style สำหรับปุ่ม Click โดยเฉพาะ (เพื่อให้ปุ่มดูเด่นและน่ารัก)
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .special-link {
+                    display: inline-block;
+                    margin-top: 15px;
+                    padding: 10px 25px;
+                    background: linear-gradient(45deg, #ff85a1, #ff4d6d);
+                    color: white !important;
+                    text-decoration: none;
+                    border-radius: 30px;
+                    font-weight: bold;
+                    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+                    transition: all 0.3s ease;
+                    animation: pulse 1.5s infinite;
+                }
+                .special-link:hover {
+                    transform: scale(1.1) translateY(-3px);
+                    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+                    background: linear-gradient(45deg, #ff4d6d, #ff85a1);
+                }
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            content.innerHTML = `
+                <h1 style="font-size: 3.5rem; margin-bottom: 0;">🐱</h1>
+                <h1 style="margin-top: 10px;">เย้! ดีกันแล้วนะ</h1>
+                <p style="margin-bottom: 10px;">เค้าขอโทษที่ทำให้เธอไม่สบายใจนะ<br><b>รักนะหมูน้อย</b></p>
+                
+                <a href="https://www.facebook.com/story.php?story_fbid=1975404950067208&id=100027931660555&rdid=XqlIvVkJB9vX8rVf#" 
+                   class="special-link" target="_blank">
+                   👉 ลองจิ้มตรงนี้ดู 👈
+                </a>
+                <br>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGpnMWc0cDd4dnA1bWJ3aHRpd3luZTRjdXVlanRiNGt4cm5wanFpcSZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/MDJ9IbxxvDUQM/giphy.gif" 
+                     width="180" style="border-radius:20px; margin-top:20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            `;
+            
+            setInterval(spawnHeart, 300);
+        }
+
+        function spawnHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
+
+
+                
+ 
